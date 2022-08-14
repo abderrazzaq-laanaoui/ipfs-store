@@ -1,0 +1,175 @@
+/* Style of the modal */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s, opacity 0.5s linear;
+
+}
+
+/* 
+.modal form {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.modal.hide {
+    visibility: hidden;
+    opacity: 0;
+}
+
+label {
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 350px;
+}
+
+label input[type="file"] {
+    display: none;
+}
+
+label input {
+    height: 30px;
+    outline: none;
+    border-radius: 5px;
+    border: 0px;
+} */
+
+.modal .modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    max-height: 500px;
+    height: 100%;
+    background: #f6f6f6;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.modal .modal-content .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.modal .modal-content .modal-header .modal-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+}
+
+.modal .modal-content .modal-header .modal-close {
+    font-size: 20px;
+    height: 50px;
+    width: 50px;
+    background: transparent;
+    border: 0px;
+    font-weight: bold;
+    color: rgb(253, 0, 0);
+    cursor: pointer;
+}
+
+.modal .modal-content .modal-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+.modal .modal-body form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+.modal .modal-body form label {
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 300px;
+}
+
+.modal .modal-body form label input[type="file"] {
+    display: none;
+}
+
+.modal .modal-body form label input {
+    height: 30px;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #c3bfbf;
+    padding: 5px;
+}
+
+.modal .modal-body form label input:focus {
+    border: 1px solid #999393;
+}
+
+.modal .modal-body form label button.file-select {
+
+    outline: none;
+    border-radius: 5px;
+    border: 0px;
+    background: #FFF;
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    height: 30px;
+    width: 60%;
+    border: 1px solid #c3bfbf;
+
+
+}
+
+.modal .modal-body form label button.file-select:hover {
+    background: #e0e0e0;
+}
+
+.modal .modal-body form input[type="submit"] {
+    outline: none;
+    border-radius: 5px;
+    border: 0px;
+    background: #0ec129;
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    height: 30px;
+    margin-top: 30px;
+    width: 50%;
+    padding: 8px;
+}
+
+.modal.hide {
+    visibility: hidden;
+    opacity: 0;
+}
