@@ -65,7 +65,6 @@ const put = async (node,value) => {
 // return each time a group each group has 6 items (pagination) 
 const get = async (node,grpkey) => {
   const data = await getDataObject(node);
-  console.log(data.groups[grpkey]);
   return data.groups[grpkey];
 }
 
