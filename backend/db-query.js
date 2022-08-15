@@ -1,6 +1,6 @@
 // 1. Load data from json file stored in ipfs.files  to an Object
 /*
- * a. create ipfs node
+ * a. create ipfs node  
  * b. create a datastore in the ipfs node if it doesn't exist yet with initial data
  * c. load data from json file stored in ipfs.files  to an Object
  */
@@ -12,7 +12,7 @@
 
 const loadIpfs = async () => {
   const IPFS = await import("ipfs-core");
-  const ipfs = await IPFS.create({ silent: true });
+  const ipfs = await IPFS.create({ url: "https://ipfs.infura.io:5001/api/v0", silent: true });
   return ipfs.files;
 };
 
@@ -25,7 +25,7 @@ const createDatastore = async (node) => {
       Buffer.from(
         JSON.stringify({
           id: 1,
-          groups:[],
+          groups: [],
         })
       ),
       { create: true }
@@ -45,25 +45,33 @@ const getDataObject = async (node) => {
 };
 // END TODO
 
-const getItemGrp = (id)=>{
-  return Math.ceil(id / 6) -1;
+const getItemGrp = (id) => {
+  return Math.ceil(id / 6) - 1;
 }
 
-const put = async (node,value) => {
+const put = async (node, value) => {
   let data = await getDataObject(node);
   let index = getItemGrp(data.id);
-  if(data.groups[index] === undefined){
-    data.groups[index] = {};
+  value.id = data.id;
+  if (data.groups[index] === undefined) {
+    data.groups[index] = [];
   }
-  data.groups[index][data.id] = value;
+  data.groups[index].push(value);
   data.id++;
   await node.write("/datastore.json", Buffer.from(
     JSON.stringify(data)), { create: true });
-  return data;
+  return value;
 };
 
-// return each time a group each group has 6 items (pagination) 
-const get = async (node,grpkey) => {
+const getLastGrp = async (node) => {
+  let ret = {};
+  let data = await getDataObject(node);
+  let index = getItemGrp(data.id > 0 ? data.id - 1 : data.id);
+  ret.groupId = index;
+  ret.items = data.groups[index];
+  return ret;
+}
+const get = async (node, grpkey) => {
   const data = await getDataObject(node);
   return data.groups[grpkey];
 }
@@ -78,4 +86,6 @@ const main = async () => {
   return node;
 };
 
-module.exports = { main, put, get };
+module.exports = { main, put, get, getLastGrp };
+
+

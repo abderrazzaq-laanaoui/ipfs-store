@@ -2,9 +2,11 @@
   "name": "ipfs-store",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,7 @@
   },
   "homepage": "https://github.com/abderrazzaq-laanaoui/ipfs-store#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.1",
     "ipfs": "^0.63.5",
     "json-query": "^2.2.2"

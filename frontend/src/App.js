@@ -1,35 +1,29 @@
-import "./App.css";
 import { CardList } from "./components/CardList/card-list";
-import { Modal } from "./components/Modal/modal";
 import { Scroll } from "./components/Scroll/scroll";
+import { Modal } from "./components/Modal/modal";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import "./App.css";
 
-const items = [
-  { id: 1, name: "SVG ITEM 1", price: 10, image: "./images/item.svg" },
-  { id: 2, name: "SVG 2", price: 8, image: "./images/item.svg" },
-  { id: 3, name: "SVG 3", price: 8, image: "./images/item.svg" },
-  { id: 4, name: "SVG 4", price: 8, image: "./images/item.svg" },
-  { id: 5, name: "SVG 5", price: 8, image: "./images/item.svg" },
-  { id: 6, name: "SVG 2", price: 8, image: "./images/item.svg" },
-  { id: 7, name: "SVG 2", price: 8, image: "./images/item.svg" },
-  { id: 8, name: "SVG 2", price: 8, image: "./images/item.svg" },
-  { id: 9, name: "SVG 2", price: 8, image: "./images/item.svg" },
-  { id: 10, name: "SVG 2", price: 8, image: "./images/item.svg" },
-  { id: 11, name: "SVG 2", price: 8, image: "./images/item.svg" },
-  { id: 12, name: "SVG 2", price: 8, image: "./images/item.svg" },
-  { id: 14, name: "SVG 2", price: 8, image: "./images/item.svg" },
-  { id: 15, name: "SVG 2", price: 8, image: "./images/item.svg" },
-  { id: 16, name: "SVG 2", price: 8, image: "./images/item.svg" },
-  { id: 17, name: "SVG 2", price: 8, image: "./images/item.svg" },
-  { id: 18, name: "SVG 2", price: 8, image: "./images/item.svg" },
-  { id: 19, name: "SVG 2", price: 8, image: "./images/item.svg" },
-  { id: 20, name: "SVG 2", price: 8, image: "./images/item.svg" },
-  { id: 21, name: "SVG 2", price: 8, image: "./images/item.svg" },
-  { id: 22, name: "SVG 2", price: 8, image: "./images/item.svg" },
-  { id: 23, name: "SVG 2", price: 8, image: "./images/item.svg" },
-  { id: 24, name: "SVG 2", price: 8, image: "./images/item.svg" },
-  { id: 25, name: "SVG 2", price: 8, image: "./images/item.svg" },
-];
+const API_URL = "http://localhost:8080/";
+
+
 const App = () => {
+  const [items, setItems] = useState([]);
+  const [groupId, setGroupId] = useState(0);
+
+  useEffect(() => {
+    axios.get(API_URL).then(response => {
+
+      setItems(response.data.items);
+      setGroupId(response.data.groupId);
+    })
+      .catch(error => {
+        console.log(error);
+      });
+
+  })
+
   const onAdd = ({ name, price, image }) => {
     items.push({ id: items.length + 1, name, price, image });
   };
