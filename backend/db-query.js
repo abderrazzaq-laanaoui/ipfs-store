@@ -8,7 +8,6 @@
 // 2. Query data from the object using query-json library when get function is called
 // 3. Update data in the object using update-json library when put function is called and update the json file in ipfs.files
 
-// TODO : call this three functions when the app is started
 
 const loadIpfs = async () => {
   const IPFS = await import("ipfs-core");
@@ -43,8 +42,7 @@ const getDataObject = async (node) => {
   }
   return JSON.parse(dataArray.toString());
 };
-// END TODO
-
+  
 const getItemGrp = (id) => {
   return Math.ceil(id / 6) - 1;
 }
