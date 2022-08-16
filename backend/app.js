@@ -23,6 +23,7 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/:id", async (req, res) => {
+  console.log("get group", req.params.id)
   let data = SVG.getSixImages(req.params.id);
   if (data.items.length > 0) {
     res.send(data)
@@ -34,6 +35,7 @@ app.get("/:id", async (req, res) => {
 });
 
 app.post("/", async (req, res) => {
+  console.log("post", req.body)
   SVG.addNewImage(req.body).then((data) => {
     res.json(data);
   }
