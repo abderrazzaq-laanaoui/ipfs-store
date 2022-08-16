@@ -1,6 +1,6 @@
 import { CardList } from "./components/CardList/card-list";
 import { Scroll } from "./components/Scroll/scroll";
-import { Modal } from "./components/Modal/modal";
+import { Modal } from "./components/Modal/modal.js";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";

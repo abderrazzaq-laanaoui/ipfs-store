@@ -44,7 +44,8 @@ class SvgStorage {
       return await this.updateImageByid(id, { name, price, image });
     }
 
-    return await this.imagesStore.put({ id, name, price, image });
+    await this.imagesStore.put({ id, name, price, image });
+    return this.imagesStore.get(id)[0];
   }
 
   getAllImages() {
@@ -65,13 +66,24 @@ class SvgStorage {
     item.name = name ? name : null;
     item.price = price ? price : null;
     item.image = image ? image : null;
-    return await this.imagesStore.put(item)
+    await this.imagesStore.put(item);
+    return item;
   }
   async deleteImageByid(id) {
     const cid = await this.imagesStore.del(id)
     return cid
   }
 
+  getSixImages(counter) {
+    let res = {};
+    if (!counter) {
+      let lastId = this.imagesStore.get('').length;
+      counter = Math.ceil(lastId / 6) - 1;
+      res.groupId = counter;
+    }
+    res.items = this.imagesStore.query((item) => item.id > counter * 6 && item.id < (counter + 1) * 6);
+    return res;
+  }
 }
 
 import * as  Ipfs from 'ipfs';
