@@ -33,7 +33,12 @@ export const Modal = ({ onAdd }) => {
       alert("Please select an SVG file");
       return;
     }
-    setSelectedFile(file);
+    // get the contents of the file
+    let reader = new FileReader();
+    reader.onload = (e) => {
+      setSelectedFile(e.target.result);
+    }
+    reader.readAsText(file);
   };
 
   const handleSubmit = (e) => {

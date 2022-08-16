@@ -1,6 +1,6 @@
 import { CardList } from "./components/CardList/card-list";
 import { Scroll } from "./components/Scroll/scroll";
-import { Modal } from "./components/Modal/modal.js";
+import { Modal } from "./components/Modal/modal";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
@@ -10,7 +10,7 @@ const API_URL = "http://localhost:8080/";
 
 const App = () => {
   const [items, setItems] = useState([]);
-  const [groupId, setGroupId] = useState(0);
+  const [groupId, setGroupId] = useState(undefined);
 
   useEffect(() => {
     axios.get(API_URL).then(response => {
@@ -22,10 +22,28 @@ const App = () => {
         console.log(error);
       });
 
-  })
+  }, [])
+
+  const getNextGroup = () => {
+    console.log(groupId);
+    axios.get(API_URL + (groupId - 1)).then(response => {
+
+      setItems(items.concat(response.data));
+      setGroupId(groupId - 1);
+    }).catch(error => {
+      console.log(error);
+    }
+    );
+  }
 
   const onAdd = ({ name, price, image }) => {
-    items.push({ id: items.length + 1, name, price, image });
+    axios.post(API_URL, { name, price, image }).then(response => {
+      console.log(response);
+      setItems(items.concat(response.data));
+    }).catch(error => {
+      console.log(error);
+    });
+
   };
 
   const showModal = () => {
@@ -42,7 +60,9 @@ const App = () => {
       </button>
       <Scroll>
         <CardList items={items} />
-        <button className="load">Load more...</button>
+        {groupId > 0 ?
+          <button className="load" onClick={getNextGroup}>Load more...</button>
+          : null}
       </Scroll>
     </div>
   );
