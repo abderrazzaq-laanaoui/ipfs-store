@@ -1,5 +1,8 @@
 const express = require("express");
 var cors = require('cors')
+import SVG from './db-query.js';
+
+
 
 const { main, get, put, getLastGrp } = require("./db-query");
 var node;
@@ -55,7 +58,8 @@ app.post("/", async (req, res) => {
 
 });
 
-initApp();
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+SVG.onready = () => {
+  app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`);
+  })
+}
