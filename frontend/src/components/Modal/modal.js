@@ -14,6 +14,7 @@ export const Modal = ({ onAdd }) => {
     setSelectedFile(null);
     setPrice("");
     // hide the modal
+    document.getElementById("file-input").value = ""
     document.querySelector(".modal").classList.add("hide");
   };
 
