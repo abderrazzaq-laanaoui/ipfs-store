@@ -77,11 +77,11 @@ class SvgStorage {
   getSixImages(counter) {
     let res = {};
     if (!counter) {
-      let lastId = this.imagesStore.get('').length;
+      let lastId = this.getAllImages().length;
       counter = Math.ceil(lastId / 6) - 1;
-      res.groupId = counter;
     }
-    res.items = this.imagesStore.query((item) => item.id > counter * 6 && item.id < (counter + 1) * 6);
+    res.groupId = counter;
+    res.items = this.imagesStore.query((item) => item.id > counter * 6 && item.id <= (counter + 1) * 6);
     return res;
   }
 }

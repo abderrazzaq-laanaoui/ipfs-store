@@ -12,7 +12,6 @@ app.use(express.json());
 
 
 
-
 app.get("/", async (req, res) => {
   let data = SVG.getSixImages();
   if (data.items.length > 0) {
@@ -22,9 +21,19 @@ app.get("/", async (req, res) => {
   }
 });
 
+app.get("/all", async (req, res) => {
+  let data = SVG.getAllImages();
+  if (data.length > 0) {
+    res.send(data)
+  } else {
+    res.status(404).json({ message: "no data" })
+  }
+});
+
 app.get("/:id", async (req, res) => {
-  console.log("get group", req.params.id)
   let data = SVG.getSixImages(req.params.id);
+  console.log("get group", req.params.id, "with ", data.items.length, "items");
+
   if (data.items.length > 0) {
     res.send(data)
   }
