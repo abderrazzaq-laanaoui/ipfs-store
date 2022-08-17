@@ -31,7 +31,7 @@ app.get("/all", async (req, res) => {
 });
 
 app.get("/:id", async (req, res) => {
-  let data = SVG.getSixImages(req.params.id);
+  let data = SVG.getSixImages(parseInt(req.params.id));
   console.log("get group", req.params.id, "with ", data.items.length, "items");
 
   if (data.items.length > 0) {

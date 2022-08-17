@@ -76,7 +76,7 @@ class SvgStorage {
 
   getSixImages(counter) {
     let res = {};
-    if (!counter) {
+    if (counter === undefined) {
       let lastId = this.getAllImages().length;
       counter = Math.ceil(lastId / 6) - 1;
     }
