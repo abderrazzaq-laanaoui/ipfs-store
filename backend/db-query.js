@@ -42,7 +42,7 @@ const getDataObject = async (node) => {
   }
   return JSON.parse(dataArray.toString());
 };
-  
+
 const getItemGrp = (id) => {
   return Math.ceil(id / 6) - 1;
 }

@@ -3,7 +3,7 @@ var cors = require('cors')
 
 const { main, get, put, getLastGrp } = require("./db-query");
 var node;
-const port = 8080;
+const port = process.env || 8080;
 
 
 const initApp = async () => {
@@ -19,7 +19,6 @@ app.use(express.json());
 
 
 app.get("/", async (req, res) => {
-  console.log("get last group");
   getLastGrp(node).then((data) => {
     data ? res.json(data) : res.status(404).json({ message: "no data" });
   }).catch((err) => {
@@ -42,7 +41,6 @@ app.get("/:id", async (req, res) => {
 });
 
 app.post("/", async (req, res) => {
-  console.log("post", req.body);
   put(node, req.body).then((data) => {
     res.json(data);
   }
@@ -55,7 +53,8 @@ app.post("/", async (req, res) => {
 
 });
 
-initApp();
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+initApp().then(() => {
+  app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`);
+  })
 });
