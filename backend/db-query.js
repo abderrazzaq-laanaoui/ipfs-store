@@ -66,7 +66,11 @@ const getLastGrp = async (node) => {
   let data = await getDataObject(node);
   let index = getItemGrp(data.id > 0 ? data.id - 1 : data.id);
   ret.groupId = index;
-  ret.items = data.groups[index];
+  if (data.groups[index] !== undefined) {
+    ret.items = data.groups[index];
+  } else {
+    ret.items = [];
+  }
   return ret;
 }
 const get = async (node, grpkey) => {

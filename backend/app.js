@@ -3,7 +3,7 @@ var cors = require('cors')
 
 const { main, get, put, getLastGrp } = require("./db-query");
 var node;
-const port = process.env || 8080;
+const port = process.env.PORT || 8080;
 
 
 const initApp = async () => {
