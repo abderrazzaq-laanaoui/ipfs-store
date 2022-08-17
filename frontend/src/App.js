@@ -25,9 +25,7 @@ const App = () => {
   }, [])
 
   const getNextGroup = () => {
-    console.log(groupId);
     axios.get(API_URL + (groupId - 1)).then(response => {
-      console.log(response.data);
       setItems(items.concat(response.data.items));
       setGroupId(response.data.groupId);
     }).catch(error => {
@@ -37,9 +35,7 @@ const App = () => {
   }
 
   const onAdd = ({ name, price, image }) => {
-    console.log(name, price, image);
     axios.post(API_URL, { name, price, image }).then(response => {
-      console.log(response);
       setItems([response.data, ...items]);
     }).catch(error => {
       console.log(error);
