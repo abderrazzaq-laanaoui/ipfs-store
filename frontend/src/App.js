@@ -36,7 +36,7 @@ const App = () => {
 
   const onAdd = ({ name, price, image }) => {
     axios.post(API_URL, { name, price, image }).then(response => {
-      setItems(items.concat(response.data));
+      setItems([response.data, ...items]);
     }).catch(error => {
       console.log(error);
     });

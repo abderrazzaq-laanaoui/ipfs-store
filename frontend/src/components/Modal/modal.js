@@ -14,6 +14,7 @@ export const Modal = ({ onAdd }) => {
     setSelectedFile(null);
     setPrice("");
     // hide the modal
+    document.getElementById("file-input").value = ""
     document.querySelector(".modal").classList.add("hide");
   };
 
@@ -26,6 +27,7 @@ export const Modal = ({ onAdd }) => {
   };
 
   const handleFileChange = (e) => {
+    console.log("file changed");
     let file = e.target.files[0];
     // accept only .svg files
     if (file.type !== "image/svg+xml") {
@@ -43,6 +45,7 @@ export const Modal = ({ onAdd }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(name, price, selectedFile);
     if (!name || !selectedFile || !price) {
       alert("Please fill all fields");
       return;
